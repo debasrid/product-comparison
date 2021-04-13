@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import './styles.css'
 
 const CompareImage = ({products}) =>
@@ -14,8 +14,7 @@ const CompareImage = ({products}) =>
           </th>
         )}
       </tr>
-      <tr>
-       
+      <tr>       
         {products.map(product =>
           <th key={product.Artikelnummer}>
             {product.name}
@@ -41,60 +40,36 @@ const Compare = ({products}) =>
       <table className="table">
        <tbody>
          <tr>
-         <th className="col-sm-3 col-md-3">Badges</th>
-            {products.map(product => 
-              <td className="col-sm-9 col-md-9" key={product.Artikelnummer}>
-               { (product.badges.split("|")).map(productBadge => <img key={productBadge._id} src= {productBadge}/>)}
+          <th className="col-sm-3 col-md-3">Badges</th>
+            {products.map((product, index) => (
+              <td className="col-sm-3 col-md-3" key={index}>
+                { (product.badges.split("|")).map((productBadge, badgeIndex) => <img key={badgeIndex} src= {productBadge}/>)}
               </td>
-            )}
+            ))}
           </tr>
           <tr>
-            <th className="col-sm-3 col-md-3">Materiaal</th>
-            {products.map(product =>
-              <td className="col-sm-9 col-md-9" key={product.Artikelnummer}>{product.Materiaal}</td>
-            )}
-          </tr>
-          <tr>
-            <th className="col-sm-3 col-md-3">Hardheid</th>
-            {products.map(product =>
-              <td key={product.Artikelnummer}>{product.Hardheid}</td>
-            )}
-          </tr>
-          <tr>
-            <th scope="text-center">Inwendige diameter</th>
-            {products.map(product =>
-              <td key={product.Artikelnummer} className="text-center">{product['Inwendige diameter']}</td>
-            )}
-          </tr>
-          <tr>
-            <th scope="text-center">Snoerdikte</th>
-            {products.map(product =>
-              <td key={product.Artikelnummer} className="text-center">{product.Snoerdikte}</td>
-            )}
-          </tr>
-          <tr>
-            <th scope="text-center">StepQuantity</th>
-            {products.map(product =>
-              <td key={product.Artikelnummer} className="text-center">{product.stepQuantity}</td>
-            )}
-          </tr>
-          <tr>
-            <th scope="text-center">Kleur</th>
-            {products.map(product =>
-              <td key={product.Artikelnummer} className="text-center">{product.Kleur}</td>
-            )}
-          </tr>
-          <tr>
-            <th scope="text-center">Temperatuurgebied</th>
-            {products.map(product =>
-              <td key={product.Artikelnummer} className="text-center">{product.Temperatuurgebied}</td>
-            )}
-          </tr>
-          <tr>
-            <th scope="text-center">Maat volgens AS568</th>
-            {products.map(product =>
-              <td key={product.Artikelnummer} className="text-center">{product['Maat volgens AS568']}</td>
-            )}
+          { products.map((product, index) => {
+            const {badges, compare, salePrice, manufacturerName, grossPrice, BUP_UOM, BUP_Value, uom, productImage, BUP_Conversion, minQuantity, manufacturerImage, name, sku, listPrice, channel, display, atp, ...filteredProduct} = product;
+            const sortedProduct = Object.keys(filteredProduct).sort((a, b) => a.localeCompare(b, 'en', {ignorePunctuation: true}));
+            
+
+            return(
+            <Fragment>
+              {index === 0 && 
+                <th className="col-sm-3 col-md-3" key={index}>
+                  {sortedProduct.map(featureName => 
+                    (<div key={featureName}>{featureName}</div>)
+                  )}
+                </th>
+              }
+              <td>
+                {sortedProduct.map(featureName => {                  
+                  return (<div key={product["name"].featureName}>{filteredProduct[featureName]}</div>)
+                })}
+              </td>
+            </Fragment>)
+
+            })}
           </tr>
         </tbody>
       </table>

@@ -2,14 +2,16 @@
   table {
     background-color: #fff;
     border-radius: 5px;
-    overflow: hidden;
+    overflow: auto;
     box-shadow: 0 13px 21px -5px rgba(0, 0, 0, 0.05);
     border: 1px solid #eee;
     font-size: 20px;
     table-layout: fixed;   
 
     tr > td,
-    tr > th {
+    tr > th,
+    th > div,
+    td > div {
       padding-top: 25px;
       padding-bottom: 25px;
       text-align: left;
@@ -39,5 +41,14 @@
     background-color: #fff;
   }
 
+  .sameVal {
+    font-weight: normal;
+    color: black;
+  }
+
+  .diffVal {
+    font-weight: bold;
+    color: black;
+  }
   
 }
