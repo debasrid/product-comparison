@@ -1,6 +1,6 @@
 import * as types from '../constants/types'
 
-const PRODUCT_URL = 'http://5c35e7f96fc11c0014d32fcd.mockapi.io/compare/products'
+const PRODUCT_URL = 'https://5c35e7f96fc11c0014d32fcd.mockapi.io/compare/products'
 
 export const getProducts = () =>
   dispatch =>
